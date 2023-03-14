@@ -1,25 +1,25 @@
-package com.example.myapplication.data.converters
+package com.example.myapplication.database.converters
 
 import androidx.room.TypeConverter
+import com.example.myapplication.database.models.Ticket
 import com.google.firebase.crashlytics.buildtools.reloc.com.google.common.reflect.TypeToken
 import com.google.gson.Gson
-import java.util.*
 
-class TimeCreatedConverter {
+class TicketConverter {
 
     @TypeConverter
-    fun convertString(toConvert: Calendar?): String {
+    fun convertString(toConvert: List<Ticket>?): String {
         return Gson().toJson(toConvert)
     }
 
     @TypeConverter
-    fun convertFromJson(stringToConvert: String): Calendar {
+    fun convertFromJson(stringToConvert: String): List<Ticket> {
         return try {
-            val type = object : TypeToken<Calendar>() {}.type
+            val type = object : TypeToken<List<Ticket>>() {}.type
             Gson().fromJson(stringToConvert, type)
         } catch(e:Exception) {
             println("Gson error")
-            Calendar.getInstance()
+            emptyList()
         }
     }
 }
