@@ -10,17 +10,17 @@ object Routes {
 
     val TEST_PROJECTS = listOf(
         Project(
-            id = 1, name = "Test 1", coverImage = "abc",
+            id = 1, name = "Test 1", imageUUID = "a",
             tickets = listOf(Ticket("Test 1", "Test 1", canMoveOn = false)),
             teamMembers = listOf("Jamie Dickson", "Manuel Monroe", "Elizabeth the Second", "Tommas Edding")
         ),
         Project(
-            id = 1, name = "Test 2", coverImage = "abc",
+            id = 1, name = "Test 2", imageUUID = "b",
             tickets = listOf(Ticket("Test 2", "Test 2", canMoveOn = false)),
             teamMembers = listOf("Jamie Dickson", "Manuel Monroe", "Elizabeth the Second", "Tommas Edding")
         ),
         Project(
-            id = 1, name = "Test 3", coverImage = "abc",
+            id = 1, name = "Test 3", imageUUID = "c",
             tickets = listOf(Ticket("Test 3", "Test 3", canMoveOn = false)),
             teamMembers = listOf("Jamie Dickson", "Manuel Monroe", "Elizabeth the Second", "Tommas Edding")
         )

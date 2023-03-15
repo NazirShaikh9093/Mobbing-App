@@ -11,13 +11,13 @@ import java.util.*
 data class Project(
     @PrimaryKey(autoGenerate = true) val id: Int? = null,
     val name: String,
-    val coverImage: String,
+    val imageUUID: String,
     val tickets: List<Ticket>,
     val teamMembers: List<String>,
     val timeCreated: Calendar = Calendar.getInstance()
 ): Parcelable {
 
     override fun toString(): String {
-        return "Project(id=$id, name='$name', coverImage='$coverImage', tickets=$tickets, teamMembers=$teamMembers, timeCreated=$timeCreated)"
+        return "Project(id=$id, name='$name', imageUUID='$imageUUID', tickets=$tickets, teamMembers=$teamMembers, timeCreated=$timeCreated)"
     }
 }

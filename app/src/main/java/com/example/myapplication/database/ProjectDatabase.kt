@@ -11,7 +11,7 @@ import com.example.myapplication.database.models.Project
 
 @Database(
     entities = [Project::class],
-    version = 2
+    version = 3
 )
 
 @TypeConverters(TicketConverter::class, TimeCreatedConverter::class, StringListConverter::class)

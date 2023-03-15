@@ -15,10 +15,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.net.toUri
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.myapplication.util.Routes
 import com.example.myapplication.util.UiEvent
@@ -58,8 +58,8 @@ fun ProjectsScreen(
                 modifier = Modifier.fillMaxSize(),
                 horizontalArrangement = Arrangement.SpaceBetween,
             ) {
-                items(Routes.TEST_PROJECTS) {
-                    ProjectItem(name = it.name, image = it.coverImage.toUri())
+                items(projects.value) {
+                    ProjectItem(name = it.name, imageUUID = it.imageUUID)
                 }
                 item {
                     Column(
@@ -77,6 +77,7 @@ fun ProjectsScreen(
                             contentDescription = "Add new project",
                             modifier = Modifier.size(100.dp),
                             colorFilter = ColorFilter.tint(Color.White),
+                            contentScale = ContentScale.Crop
                         )
                     }
                 }

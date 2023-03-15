@@ -1,6 +1,5 @@
 package com.example.myapplication.ui.projects_screen
 
-import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -11,12 +10,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 
 @Composable
-fun ProjectItem(name: String, image: Uri) {
-    val painter = rememberAsyncImagePainter(image)
+fun ProjectItem(name: String, imageUUID: String) {
+    val context = LocalContext.current
+    val painter = rememberAsyncImagePainter(context.filesDir.resolve(imageUUID))
     Column(modifier = Modifier, verticalArrangement = Arrangement.SpaceBetween, horizontalAlignment = Alignment.CenterHorizontally) {
         Image(
             painter = painter,
