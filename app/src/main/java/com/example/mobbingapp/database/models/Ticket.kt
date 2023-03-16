@@ -7,12 +7,14 @@ import java.util.*
 @Parcelize
 data class Ticket(
     val name: String,
-    val description: String,
-    val canMoveOn: Boolean,
+    val uuid: String,
+    val notes: String,
+    val canMoveOn: Boolean = false,
+    val phaseData: PhaseData = PhaseData(),
     val timeCreated: Calendar = Calendar.getInstance()
 ) : Parcelable {
 
     override fun toString(): String {
-        return "Ticket(name='$name', description='$description', canMoveOn=$canMoveOn, timeCreated=$timeCreated)"
+        return "Ticket(name='$name', notes='$notes', canMoveOn=$canMoveOn, phaseData=$phaseData, timeCreated=$timeCreated)"
     }
 }

@@ -79,7 +79,7 @@ fun ProjectCreateOrAmendScreen(
         ) {
             Text(
                 text = viewModel.screenTitle, color = Color.White,
-                fontSize = 30.sp
+                fontSize = 40.sp
             )
             Spacer(modifier = Modifier.height(20.dp))
             Column(

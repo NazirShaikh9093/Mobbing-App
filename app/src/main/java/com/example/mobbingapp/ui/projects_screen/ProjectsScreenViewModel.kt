@@ -24,7 +24,7 @@ class ProjectsScreenViewModel @Inject constructor(
     fun onEvent(event: ProjectsScreenEvent) {
         when (event) {
             is ProjectsScreenEvent.OnProjectSelection -> {
-                sendUiEvent(UiEvent.Navigate(Routes.PROJECT_TICKET_BOARD + "?projectId=${event.project.id}"))
+                sendUiEvent(UiEvent.Navigate(Routes.TICKET_BOARD + "?projectId=${event.project.id}"))
             }
             is ProjectsScreenEvent.AddNewProject -> {
                 sendUiEvent(UiEvent.Navigate(Routes.PROJECT_CREATION_OR_AMENDMENT))

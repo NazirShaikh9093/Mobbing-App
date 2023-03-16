@@ -49,7 +49,7 @@ fun ProjectsScreen(
             Text(
                 text = "Projects", color = Color.White, modifier = Modifier
                     .padding(10.dp),
-                fontSize = 30.sp
+                fontSize = 40.sp
             )
             LazyVerticalGrid(
                 state = state,
@@ -58,7 +58,7 @@ fun ProjectsScreen(
                 horizontalArrangement = Arrangement.SpaceBetween,
             ) {
                 items(projects.value) {
-                    ProjectItem(name = it.name, imageUUID = it.imageUUID)
+                    ProjectItem(name = it.name, imageUUID = it.imageUUID) { viewModel.onEvent(ProjectsScreenEvent.OnProjectSelection(it)) }
                 }
                 item {
                     Column(
