@@ -10,6 +10,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.mobbingapp.ui.create_ticket_screen.CreateTicketScreen
 import com.example.mobbingapp.ui.project_create_or_amend.ProjectCreateOrAmendScreen
+import com.example.mobbingapp.ui.project_settings_screen.ProjectSettingsScreen
 import com.example.mobbingapp.ui.projects_screen.ProjectsScreen
 import com.example.mobbingapp.ui.theme.MobbingAppTheme
 import com.example.mobbingapp.ui.ticket_info_screen.TicketInfoScreen
@@ -81,6 +82,18 @@ class MainActivity : ComponentActivity() {
                             }
                         )) {
                         TicketInfoScreen(
+                            onNavigation = { navController.navigate(it.route) }
+                        )
+                    }
+                    composable(route = Routes.PROJECT_SETTINGS + "?projectId={projectId}",
+                        arguments = listOf(
+                            navArgument(name = "projectId") {
+                                type = NavType.IntType
+                                defaultValue = -1
+                            }
+                        )
+                    ) {
+                        ProjectSettingsScreen(
                             onNavigation = { navController.navigate(it.route) }
                         )
                     }
