@@ -1,4 +1,4 @@
-package com.example.mobbingapp.ui.ticket_screen
+package com.example.mobbingapp.ui.tickets_screen
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class TicketScreenViewModel @Inject constructor(
+class TicketsScreenViewModel @Inject constructor(
     private val repository: ProjectRepository,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
@@ -57,7 +57,7 @@ class TicketScreenViewModel @Inject constructor(
             viewModelScope.launch {
                 val project: Project? = repository.getProjectById(projectId)
                 if (project != null) {
-                    this@TicketScreenViewModel.project = project
+                    this@TicketsScreenViewModel.project = project
                     tickets = project.tickets
                 } else {
                     TODO("Handle error")
@@ -93,19 +93,19 @@ class TicketScreenViewModel @Inject constructor(
         this.ticketsInTest = ticketsInTest
     }
 
-    fun onEvent(event: TicketScreenEvent) {
+    fun onEvent(event: TicketsScreenEvent) {
         when (event) {
-            is TicketScreenEvent.OnAddTicketPressed -> {
+            is TicketsScreenEvent.OnAddTicketsPressed -> {
                 sendUiEvent(UiEvent.Navigate(Routes.TICKET_CREATION + "?projectId=${project?.id}"))
             }
-            is TicketScreenEvent.OnBackPressed -> {
+            is TicketsScreenEvent.OnBackPressed -> {
                 sendUiEvent(UiEvent.Navigate(Routes.PROJECT_SELECTION))
             }
-            is TicketScreenEvent.OnSettingsPressed -> {
+            is TicketsScreenEvent.OnSettingsPressed -> {
                 sendUiEvent(UiEvent.Navigate(Routes.PROJECT_SETTINGS + "?projectId=${project?.id}"))
             }
-            is TicketScreenEvent.OnTicketPressed -> {
-                sendUiEvent(UiEvent.Navigate(Routes.TICKET_VIEW + "?projectId=${project?.id}&ticketId=${event.ticket.uuid}"))
+            is TicketsScreenEvent.OnTicketPressed -> {
+                sendUiEvent(UiEvent.Navigate(Routes.TICKET_VIEW + "?projectId=${project?.id}&ticketId=${event.ticketUUID}"))
             }
         }
     }

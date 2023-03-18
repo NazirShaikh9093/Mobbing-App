@@ -1,4 +1,4 @@
-package com.example.mobbingapp.ui.ticket_screen
+package com.example.mobbingapp.ui.tickets_screen
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
@@ -25,9 +25,9 @@ import com.example.mobbingapp.util.UiEvent
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun TicketScreen(
+fun TicketsScreen(
     onNavigation: (UiEvent.Navigate) -> Unit,
-    viewModel: TicketScreenViewModel = hiltViewModel()
+    viewModel: TicketsScreenViewModel = hiltViewModel()
 ) {
     LaunchedEffect(key1 = true) {
         viewModel.uiEvent.collect {
@@ -46,7 +46,7 @@ fun TicketScreen(
         scaffoldState = scaffoldState,
         floatingActionButton = {
             FloatingActionButton(onClick = {
-                viewModel.onEvent(TicketScreenEvent.OnAddTicketPressed)
+                viewModel.onEvent(TicketsScreenEvent.OnAddTicketsPressed)
             }) {
                 Icon(
                     imageVector = Icons.Default.Add,
@@ -71,7 +71,7 @@ fun TicketScreen(
                     contentDescription = "Back arrow",
                     modifier = Modifier.size(60.dp).weight(1f)
                         .clickable {
-                            viewModel.onEvent(TicketScreenEvent.OnBackPressed)
+                            viewModel.onEvent(TicketsScreenEvent.OnBackPressed)
                         }
                 )
                 Text(
@@ -87,7 +87,7 @@ fun TicketScreen(
                     contentDescription = "Settings icon",
                     modifier = Modifier.size(40.dp).weight(1f)
                         .clickable {
-                            viewModel.onEvent(TicketScreenEvent.OnSettingsPressed)
+                            viewModel.onEvent(TicketsScreenEvent.OnSettingsPressed)
                         }
                 )
             }
@@ -103,7 +103,7 @@ fun TicketScreen(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                items(viewModel.ticketsInEmpathise) { TicketItem(name = it.name) }
+                items(viewModel.ticketsInEmpathise) { TicketItem(name = it.name) { viewModel.onEvent(TicketsScreenEvent.OnTicketPressed(it.uuid)) } }
             }
             Spacer(modifier = Modifier.height(8.dp))
             Text(text = "Define", fontSize = 24.sp)
@@ -117,7 +117,7 @@ fun TicketScreen(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                items(viewModel.ticketsInDefine) { TicketItem(name = it.name) }
+                items(viewModel.ticketsInDefine) { TicketItem(name = it.name) { viewModel.onEvent(TicketsScreenEvent.OnTicketPressed(it.uuid)) } }
             }
             Spacer(modifier = Modifier.height(8.dp))
             Text(text = "Ideate", fontSize = 24.sp)
@@ -131,7 +131,7 @@ fun TicketScreen(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                items(viewModel.ticketsInIdeate) { TicketItem(name = it.name) }
+                items(viewModel.ticketsInIdeate) { TicketItem(name = it.name) { viewModel.onEvent(TicketsScreenEvent.OnTicketPressed(it.uuid)) } }
             }
             Spacer(modifier = Modifier.height(8.dp))
             Text(text = "Prototype", fontSize = 24.sp)
@@ -145,7 +145,7 @@ fun TicketScreen(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                items(viewModel.ticketsInPrototype) { TicketItem(name = it.name) }
+                items(viewModel.ticketsInPrototype) { TicketItem(name = it.name) { viewModel.onEvent(TicketsScreenEvent.OnTicketPressed(it.uuid)) } }
             }
             Spacer(modifier = Modifier.height(8.dp))
             Text(text = "Test", fontSize = 24.sp)
@@ -159,7 +159,7 @@ fun TicketScreen(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                items(viewModel.ticketsInTest) { TicketItem(name = it.name) }
+                items(viewModel.ticketsInTest) { TicketItem(name = it.name) { viewModel.onEvent(TicketsScreenEvent.OnTicketPressed(it.uuid)) } }
             }
         }
     }

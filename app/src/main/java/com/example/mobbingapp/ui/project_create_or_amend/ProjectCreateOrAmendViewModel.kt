@@ -22,8 +22,7 @@ class ProjectCreateOrAmendViewModel @Inject constructor(
 ) : ViewModel(
 
 ) {
-    var project by mutableStateOf<Project?>(null)
-        private set
+    private var project by mutableStateOf<Project?>(null)
 
     var projectName by mutableStateOf("")
         private set

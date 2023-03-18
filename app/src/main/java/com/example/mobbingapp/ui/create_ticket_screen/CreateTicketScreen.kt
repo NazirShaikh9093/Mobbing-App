@@ -62,7 +62,7 @@ fun CreateTicketScreen(
                 Spacer(modifier = Modifier.width(60.dp))
             }
             Spacer(modifier = Modifier.height(40.dp))
-            Text(text = "Ticket name:")
+            Text(text = "Ticket name:", fontSize = 20.sp)
             Spacer(modifier = Modifier.height(8.dp))
             TextField(
                 value = viewModel.ticketName,
@@ -76,7 +76,7 @@ fun CreateTicketScreen(
                 modifier = Modifier.fillMaxWidth()
             )
             Spacer(modifier = Modifier.height(40.dp))
-            Text(text = "Notes:")
+            Text(text = "Notes:", fontSize = 20.sp)
             Spacer(modifier = Modifier.height(8.dp))
             TextField(
                 value = viewModel.ticketNotes,

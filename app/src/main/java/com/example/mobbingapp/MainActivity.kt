@@ -12,7 +12,8 @@ import com.example.mobbingapp.ui.create_ticket_screen.CreateTicketScreen
 import com.example.mobbingapp.ui.project_create_or_amend.ProjectCreateOrAmendScreen
 import com.example.mobbingapp.ui.projects_screen.ProjectsScreen
 import com.example.mobbingapp.ui.theme.MobbingAppTheme
-import com.example.mobbingapp.ui.ticket_screen.TicketScreen
+import com.example.mobbingapp.ui.ticket_info_screen.TicketInfoScreen
+import com.example.mobbingapp.ui.tickets_screen.TicketsScreen
 import com.example.mobbingapp.util.Routes
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -53,7 +54,7 @@ class MainActivity : ComponentActivity() {
                                 defaultValue = -1
                             }
                         )) {
-                        TicketScreen(
+                        TicketsScreen(
                             onNavigation = { navController.navigate(it.route) }
                         )
                     }
@@ -65,6 +66,21 @@ class MainActivity : ComponentActivity() {
                             }
                         )) {
                         CreateTicketScreen(
+                            onNavigation = { navController.navigate(it.route) }
+                        )
+                    }
+                    composable(route = Routes.TICKET_VIEW + "?projectId={projectId}&ticketId={ticketId}",
+                        arguments = listOf(
+                            navArgument(name = "projectId") {
+                                type = NavType.IntType
+                                defaultValue = -1
+                            },
+                            navArgument(name = "ticketId") {
+                                type = NavType.StringType
+                                defaultValue = "-1"
+                            }
+                        )) {
+                        TicketInfoScreen(
                             onNavigation = { navController.navigate(it.route) }
                         )
                     }
