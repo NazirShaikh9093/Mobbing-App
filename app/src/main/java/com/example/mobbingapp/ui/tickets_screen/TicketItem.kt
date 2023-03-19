@@ -1,7 +1,9 @@
 package com.example.mobbingapp.ui.tickets_screen
 
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Card
 import androidx.compose.material.Text
@@ -10,18 +12,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 
 @Composable
-fun TicketItem(name: String, onTicketPressed: () -> Unit) {
+fun TicketItem(name: String, modifier: Modifier, textSize: TextUnit) {
     Card(
-        modifier = Modifier
-            .width(150.dp)
-            .height(60.dp)
-            .clickable {
-                onTicketPressed.invoke()
-            },
+        modifier = modifier,
         shape = CircleShape
     ) {
         Column(
@@ -31,9 +29,10 @@ fun TicketItem(name: String, onTicketPressed: () -> Unit) {
         ) {
             Text(
                 text = name,
-                fontSize = 20.sp,
+                fontSize = textSize,
                 color = Color.White,
                 maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
                 softWrap = true,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.padding(16.dp, 0.dp)

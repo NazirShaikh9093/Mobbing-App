@@ -9,7 +9,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.mobbingapp.ui.create_ticket_screen.CreateTicketScreen
-import com.example.mobbingapp.ui.project_create_or_amend.ProjectCreateOrAmendScreen
+import com.example.mobbingapp.ui.project_create_or_amend_screen.ProjectCreateOrAmendScreen
+import com.example.mobbingapp.ui.project_data_screen.ProjectDataScreen
 import com.example.mobbingapp.ui.project_settings_screen.ProjectSettingsScreen
 import com.example.mobbingapp.ui.projects_screen.ProjectsScreen
 import com.example.mobbingapp.ui.theme.MobbingAppTheme
@@ -32,9 +33,7 @@ class MainActivity : ComponentActivity() {
                 {
                     composable(Routes.PROJECT_SELECTION) {
                         ProjectsScreen(
-                            onNavigate = {
-                                navController.navigate(it.route)
-                            }
+                            onNavigate = { navController.navigate(it.route) }
                         )
                     }
                     composable(route = Routes.PROJECT_CREATION_OR_AMENDMENT + "?projectId={projectId}",
@@ -94,6 +93,18 @@ class MainActivity : ComponentActivity() {
                         )
                     ) {
                         ProjectSettingsScreen(
+                            onNavigation = { navController.navigate(it.route) }
+                        )
+                    }
+                    composable(route = Routes.PROJECT_DATA + "?projectId={projectId}",
+                        arguments = listOf(
+                            navArgument(name = "projectId") {
+                                type = NavType.IntType
+                                defaultValue = -1
+                            }
+                        )
+                    ) {
+                        ProjectDataScreen(
                             onNavigation = { navController.navigate(it.route) }
                         )
                     }

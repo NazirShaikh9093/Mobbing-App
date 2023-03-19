@@ -1,12 +1,8 @@
 package com.example.mobbingapp.ui.tickets_screen
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -69,7 +65,9 @@ fun TicketsScreen(
                 Icon(
                     imageVector = Icons.Default.KeyboardArrowLeft,
                     contentDescription = "Back arrow",
-                    modifier = Modifier.size(60.dp).weight(1f)
+                    modifier = Modifier
+                        .size(60.dp)
+                        .weight(1f)
                         .clickable {
                             viewModel.onEvent(TicketsScreenEvent.OnBackPressed)
                         }
@@ -85,7 +83,9 @@ fun TicketsScreen(
                 Icon(
                     imageVector = Icons.Default.Settings,
                     contentDescription = "Settings icon",
-                    modifier = Modifier.size(40.dp).weight(1f)
+                    modifier = Modifier
+                        .size(40.dp)
+                        .weight(1f)
                         .clickable {
                             viewModel.onEvent(TicketsScreenEvent.OnSettingsPressed)
                         }
@@ -94,73 +94,23 @@ fun TicketsScreen(
             Spacer(modifier = Modifier.height(8.dp))
             Text(text = "Empathise", fontSize = 24.sp)
             Spacer(modifier = Modifier.height(8.dp))
-            LazyRow(
-                modifier = Modifier
-                    .background(color = Color.LightGray, shape = CircleShape)
-                    .fillMaxWidth()
-                    .height(80.dp)
-                    .padding(8.dp, 0.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                items(viewModel.ticketsInEmpathise) { TicketItem(name = it.name) { viewModel.onEvent(TicketsScreenEvent.OnTicketPressed(it.uuid)) } }
-            }
+            ScrollableTicketRow(tickets = viewModel.ticketsInEmpathise, onTicketPressed = { viewModel.onEvent(TicketsScreenEvent.OnTicketPressed(it)) })
             Spacer(modifier = Modifier.height(8.dp))
             Text(text = "Define", fontSize = 24.sp)
             Spacer(modifier = Modifier.height(8.dp))
-            LazyRow(
-                modifier = Modifier
-                    .background(color = Color.LightGray, shape = CircleShape)
-                    .fillMaxWidth()
-                    .height(80.dp)
-                    .padding(8.dp, 0.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                items(viewModel.ticketsInDefine) { TicketItem(name = it.name) { viewModel.onEvent(TicketsScreenEvent.OnTicketPressed(it.uuid)) } }
-            }
+            ScrollableTicketRow(tickets = viewModel.ticketsInDefine, onTicketPressed = { viewModel.onEvent(TicketsScreenEvent.OnTicketPressed(it)) })
             Spacer(modifier = Modifier.height(8.dp))
             Text(text = "Ideate", fontSize = 24.sp)
             Spacer(modifier = Modifier.height(8.dp))
-            LazyRow(
-                modifier = Modifier
-                    .background(color = Color.LightGray, shape = CircleShape)
-                    .fillMaxWidth()
-                    .height(80.dp)
-                    .padding(8.dp, 0.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                items(viewModel.ticketsInIdeate) { TicketItem(name = it.name) { viewModel.onEvent(TicketsScreenEvent.OnTicketPressed(it.uuid)) } }
-            }
+            ScrollableTicketRow(tickets = viewModel.ticketsInIdeate, onTicketPressed = { viewModel.onEvent(TicketsScreenEvent.OnTicketPressed(it)) })
             Spacer(modifier = Modifier.height(8.dp))
             Text(text = "Prototype", fontSize = 24.sp)
             Spacer(modifier = Modifier.height(8.dp))
-            LazyRow(
-                modifier = Modifier
-                    .background(color = Color.LightGray, shape = CircleShape)
-                    .fillMaxWidth()
-                    .height(80.dp)
-                    .padding(8.dp, 0.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                items(viewModel.ticketsInPrototype) { TicketItem(name = it.name) { viewModel.onEvent(TicketsScreenEvent.OnTicketPressed(it.uuid)) } }
-            }
+            ScrollableTicketRow(tickets = viewModel.ticketsInPrototype, onTicketPressed = { viewModel.onEvent(TicketsScreenEvent.OnTicketPressed(it)) })
             Spacer(modifier = Modifier.height(8.dp))
             Text(text = "Test", fontSize = 24.sp)
             Spacer(modifier = Modifier.height(8.dp))
-            LazyRow(
-                modifier = Modifier
-                    .background(color = Color.LightGray, shape = CircleShape)
-                    .fillMaxWidth()
-                    .height(80.dp)
-                    .padding(8.dp, 0.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                items(viewModel.ticketsInTest) { TicketItem(name = it.name) { viewModel.onEvent(TicketsScreenEvent.OnTicketPressed(it.uuid)) } }
-            }
+            ScrollableTicketRow(tickets = viewModel.ticketsInTest, onTicketPressed = { viewModel.onEvent(TicketsScreenEvent.OnTicketPressed(it)) })
         }
     }
 }

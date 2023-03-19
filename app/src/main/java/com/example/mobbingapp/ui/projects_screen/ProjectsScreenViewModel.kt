@@ -18,7 +18,7 @@ class ProjectsScreenViewModel @Inject constructor(
 
     val projects = repository.getProjects()
 
-    private val _uiEvent =  Channel<UiEvent>()
+    private val _uiEvent = Channel<UiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
     fun onEvent(event: ProjectsScreenEvent) {

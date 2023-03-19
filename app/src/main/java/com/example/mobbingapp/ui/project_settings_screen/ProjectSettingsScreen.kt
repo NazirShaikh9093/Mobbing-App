@@ -1,12 +1,12 @@
 package com.example.mobbingapp.ui.project_settings_screen
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.Button
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
@@ -52,7 +52,24 @@ fun ProjectSettingsScreen(
                 .fillMaxSize()
                 .padding(20.dp, 10.dp),
         ) {
-            Text(text = "Project settings", fontSize = 40.sp)
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                Icon(
+                    Icons.Default.KeyboardArrowLeft,
+                    contentDescription = "Back arrow",
+                    modifier = Modifier
+                        .size(60.dp)
+                        .clickable { viewModel.onEvent(ProjectSettingsScreenEvent.OnBackPressed) }
+                )
+                Text(
+                    text = "Project settings",
+                    fontSize = 40.sp,
+                    textAlign = TextAlign.Center
+                )
+                Spacer(modifier = Modifier.width(60.dp))
+            }
             Spacer(modifier = Modifier.height(8.dp))
             Button(
                 onClick = {
@@ -88,18 +105,6 @@ fun ProjectSettingsScreen(
                     .height(50.dp)
             ) {
                 Text(text = "Delete", fontSize = 20.sp, textAlign = TextAlign.Center)
-            }
-
-            Button(
-                onClick = {
-                    viewModel.onEvent(ProjectSettingsScreenEvent.OnBackPressed)
-                },
-                shape = CircleShape,
-                modifier = Modifier
-                    .width(130.dp)
-                    .height(50.dp)
-            ) {
-                Text(text = "Back", fontSize = 20.sp)
             }
         }
     }

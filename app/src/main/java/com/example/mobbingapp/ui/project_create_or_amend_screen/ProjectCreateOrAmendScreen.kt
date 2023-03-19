@@ -1,4 +1,4 @@
-package com.example.mobbingapp.ui.project_create_or_amend
+package com.example.mobbingapp.ui.project_create_or_amend_screen
 
 import android.annotation.SuppressLint
 import android.net.Uri
