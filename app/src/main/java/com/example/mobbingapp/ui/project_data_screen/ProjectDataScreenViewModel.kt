@@ -28,7 +28,7 @@ class ProjectDataScreenViewModel @Inject constructor(
     private var project: Project? = null
     set(value) {
         field = value
-        value?.timeCreated?.let {
+        value?.dateCreated?.let {
             dateCreated = DateStuff.getDateCreated(it)
         }
     }

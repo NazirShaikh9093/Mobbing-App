@@ -8,15 +8,15 @@ import java.util.*
 data class PhaseData(
     val currentPhase: TicketPhase = TicketPhase.EMPATHISE,
     val empathiseCompletedTime: Calendar? = null,
-    val timeInEmpathise: String? = null,
+    val timeInEmpathise: String = "",
     val defineCompletedTime: Calendar? = null,
-    val timeInDefine: String? = null,
+    val timeInDefine: String = "",
     val ideateCompletedTime: Calendar? = null,
-    val timeInIdeate: String? = null,
+    val timeInIdeate: String = "",
     val prototypeCompletedTime: Calendar? = null,
-    val timeInPrototype: String? = null,
+    val timeInPrototype: String = "",
     val testCompletedTime: Calendar? = null,
-    val timeInTest: String? = null
+    val timeInTest: String = ""
 ): Parcelable {
 
     override fun toString(): String {

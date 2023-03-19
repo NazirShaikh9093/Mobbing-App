@@ -11,10 +11,10 @@ data class Ticket(
     val notes: String,
     val canMoveOn: Boolean = false,
     val phaseData: PhaseData = PhaseData(),
-    val timeCreated: Calendar = Calendar.getInstance()
+    val dateCreated: Calendar = Calendar.getInstance()
 ) : Parcelable {
 
     override fun toString(): String {
-        return "Ticket(name='$name', notes='$notes', canMoveOn=$canMoveOn, phaseData=$phaseData, timeCreated=$timeCreated)"
+        return "Ticket(name='$name', notes='$notes', canMoveOn=$canMoveOn, phaseData=$phaseData, dateCreated=$dateCreated)"
     }
 }

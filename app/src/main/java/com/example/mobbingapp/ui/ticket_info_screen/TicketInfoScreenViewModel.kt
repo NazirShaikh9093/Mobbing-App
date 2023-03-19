@@ -6,16 +6,19 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.mobbingapp.database.models.PhaseData
 import com.example.mobbingapp.database.models.Project
 import com.example.mobbingapp.database.models.Ticket
 import com.example.mobbingapp.database.models.TicketPhase
 import com.example.mobbingapp.database.repositories.ProjectRepository
+import com.example.mobbingapp.util.DateStuff
 import com.example.mobbingapp.util.Routes
 import com.example.mobbingapp.util.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -89,23 +92,17 @@ class TicketInfoScreenViewModel @Inject constructor(
         project?.let { nonNullProject ->
             ticket?.let { nonNullTicket ->
                 if (nonNullTicket.canMoveOn != canMoveOn || nonNullTicket.notes != ticketNotes || nextPhasePressed) {
-                    val ticketPhase = if (nextPhasePressed) {
-                        val phaseNo = TicketPhase.values().indexOf(nonNullTicket.phaseData.currentPhase)
-                        TicketPhase.values()[phaseNo + 1]
-                    } else {
-                        nonNullTicket.phaseData.currentPhase
-                    }
-                    if (nextPhasePressed) {
-                        canMoveOn = false
-                    }
                     val updatedTicketList = nonNullProject.tickets.map {
                         if (it.uuid == nonNullTicket.uuid) {
                             it.copy(
+                                phaseData = if (nextPhasePressed) {
+                                    canMoveOn = false
+                                    getPhaseDataForNextPhase(nonNullTicket)
+                                } else {
+                                    it.phaseData
+                                },
                                 notes = ticketNotes,
-                                canMoveOn = canMoveOn,
-                                phaseData = it.phaseData.copy(
-                                    currentPhase = ticketPhase
-                                )
+                                canMoveOn = canMoveOn
                             )
                         } else {
                             it
@@ -119,6 +116,48 @@ class TicketInfoScreenViewModel @Inject constructor(
                     }
                 }
             }
+        }
+    }
+
+    private fun getPhaseDataForNextPhase(ticket: Ticket): PhaseData {
+        val phaseData = ticket.phaseData
+        return when (phaseData.currentPhase) {
+            TicketPhase.EMPATHISE -> {
+                phaseData.copy(
+                    currentPhase = TicketPhase.DEFINE,
+                    empathiseCompletedTime = Calendar.getInstance(),
+                    timeInEmpathise = DateStuff.compareDateToCurrent(ticket.dateCreated)
+                )
+            }
+            TicketPhase.DEFINE -> {
+                phaseData.copy(
+                    currentPhase = TicketPhase.IDEATE,
+                    defineCompletedTime = Calendar.getInstance(),
+                    timeInDefine = DateStuff.compareDateToCurrent(phaseData.empathiseCompletedTime!!)
+                )
+            }
+            TicketPhase.IDEATE -> {
+                phaseData.copy(
+                    currentPhase = TicketPhase.PROTOTYPE,
+                    ideateCompletedTime = Calendar.getInstance(),
+                    timeInIdeate = DateStuff.compareDateToCurrent(phaseData.defineCompletedTime!!)
+                )
+            }
+            TicketPhase.PROTOTYPE -> {
+                phaseData.copy(
+                    currentPhase = TicketPhase.TEST,
+                    prototypeCompletedTime = Calendar.getInstance(),
+                    timeInPrototype = DateStuff.compareDateToCurrent(phaseData.ideateCompletedTime!!)
+                )
+            }
+            TicketPhase.TEST -> {
+                phaseData.copy(
+                    currentPhase = TicketPhase.FINISHED,
+                    testCompletedTime = Calendar.getInstance(),
+                    timeInTest = DateStuff.compareDateToCurrent(phaseData.prototypeCompletedTime!!)
+                )
+            }
+            else -> phaseData
         }
     }
 

@@ -14,10 +14,10 @@ data class Project(
     val imageUUID: String,
     val tickets: List<Ticket>,
     val teamMembers: List<String>,
-    val timeCreated: Calendar = Calendar.getInstance()
+    val dateCreated: Calendar = Calendar.getInstance()
 ): Parcelable {
 
     override fun toString(): String {
-        return "Project(id=$id, name='$name', imageUUID='$imageUUID', tickets=$tickets, teamMembers=$teamMembers, timeCreated=$timeCreated)"
+        return "Project(id=$id, name='$name', imageUUID='$imageUUID', tickets=$tickets, teamMembers=$teamMembers, dateCreated=$dateCreated)"
     }
 }

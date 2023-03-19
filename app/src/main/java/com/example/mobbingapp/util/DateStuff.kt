@@ -10,7 +10,8 @@ object DateStuff {
         val month = months[date.get(Calendar.MONTH)]
         val year = date.get(Calendar.YEAR)
         val hour = date.get(Calendar.HOUR)
-        val minute = date.get(Calendar.MINUTE)
+        val minuteNum = date.get(Calendar.MINUTE)
+        val minute = if (minuteNum < 10) "0$minuteNum" else minuteNum
         val amOrpM = ordinal[date.get(Calendar.AM_PM)]
 
         return "$dayWithOrdinal $month $year $hour:$minute$amOrpM"
@@ -30,7 +31,8 @@ object DateStuff {
         if (months > 0) timeString += "${months}mo "
         if (days > 0) timeString += "${days}d "
         if (hours > 0) timeString += "${hours}hr "
-        if (minutes > 0) timeString += "${minutes}m"
+        if (minutes > 0) timeString += "${minutes}m "
+        if (seconds > 0) timeString += "${seconds}s"
 
         return timeString
     }

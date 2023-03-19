@@ -11,7 +11,7 @@ import com.example.mobbingapp.database.models.Project
 
 @Database(
     entities = [Project::class],
-    version = 3
+    version = 4
 )
 
 @TypeConverters(TicketConverter::class, TimeCreatedConverter::class, StringListConverter::class)
